@@ -8,7 +8,7 @@ import bleach
 
 def connect():
     """Connect to the PostgreSQL database.  Returns a database connection."""
-    conn = psycopg2.connect("dbname=tournament")
+    conn = psycopg2.connect("dbname = tournament")
     return conn
 
 def deleteMatches():
@@ -47,7 +47,7 @@ def registerPlayer(name):
     """
     conn = connect()
     c = conn.cursor()
-    bleached_name = bleach.clean(name,strip=True)
+    bleached_name = bleach.clean(name,strip = True)
     c.execute("insert into players(pname) values(%s)" ,
               (bleached_name , ))
     conn.commit()
@@ -82,8 +82,8 @@ def reportMatch(winner, loser):
     """
     conn = connect()
     c = conn.cursor()
-    c.execute("insert into matches(winner,loser) values(%s,%s)",
-              (winner,loser,))
+    c.execute("insert into matches(winner , loser) values(%s , %s)" ,
+              (winner , loser , ))
     conn.commit()
     conn.close()
 
